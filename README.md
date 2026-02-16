@@ -25,27 +25,9 @@ This lab mirrors small-to-mid enterprise network architecture.
 - Future Domain-Joined Client Machines
 
 ---
-
-**🌐 Network Architecture**
 ## 📊 Network Diagram
 
 ![Enterprise Network Topology](diagrams/enterprise-network-topology.png)
-
-Internet  
-↓  
-Home Router  
-↓  
-Hyper-V External Switch (vSwitch-WAN)  
-↓  
-Sophos Firewall (WAN Interface)  
-↓  
-Sophos Firewall (LAN Interface – 172.16.16.16/24)  
-↓  
-Hyper-V Internal Switch (vSwitch-LAN)  
-↓  
-Internal Enterprise Network  
-
----
 
 **🔥 Firewall Deployment Details**
 
