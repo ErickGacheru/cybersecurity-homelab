@@ -29,7 +29,7 @@ This lab mirrors small-to-mid enterprise network architecture.
 **🌐 Network Architecture**
 ## 📊 Network Diagram
 
-![Enterprise Network Topology](diagrams/enterprise-network-topology.png)
+![Enterprise Network Topology](diagrams/enterprise-network-topology)
 
 Internet  
 ↓  
