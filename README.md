@@ -120,3 +120,49 @@ This project demonstrates hands-on capability with:
 - Practical cybersecurity lab simulation
 
 The lab is continuously expanded to simulate real-world defensive security scenarios.
+
+**Phase 2 – Active Directory Integration**
+
+**Overview**
+
+In this phase, the lab was expanded from a standalone firewall deployment to a fully functional enterprise domain environment.
+A Windows Server 2022 Domain Controller was deployed and integrated with DNS to provide centralized identity and authentication services.
+A Windows 11 Enterprise client was joined to the domain and authenticated using domain credentials.
+
+**Infrastructure Components**
+
+1. Firewall: Sophos Home Firewall (NAT Gateway)
+2. Domain Controller: Windows Server 2022 (DC01)
+3. Active Directory Domain Services
+4. DNS Server
+5. Client Machine: Windows 11 Enterprise (WIN11-CL01)
+6. Internal Subnet: 172.16.16.0/24
+7. Domain Name: corp.local
+
+**Key Configuration Steps**
+
+- Configured static IP addressing for domain infrastructure
+- Deployed AD DS and DNS roles
+- Created new forest: corp.local
+- Created domain user account (labuser)
+- Joined Windows 11 client to the domain
+- Verified domain authentication and DNS resolution
+
+📊 Updated Network Diagram
+
+
+🧠 Skills Demonstrated
+
+**Active Directory deployment**
+- DNS configuration and validation
+- Static IP design and segmentation
+- Domain user management
+- Domain join troubleshooting
+- Enterprise authentication workflow
+
+🚀 Next Phase (Planned)
+
+i. Group Policy deployment
+ii. User-based firewall control
+iii. Attack simulation using Kali Linux
+iv. Logging and monitoring enhancements
