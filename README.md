@@ -150,7 +150,7 @@ A Windows 11 Enterprise client was joined to the domain and authenticated using 
 
 📊 Updated Network Diagram
 
-![Enterprise Network Topology](diagrams/Phase 2 - Added Windows 11 domain client.png)
+![Enterprise Network Topology](diagrams/enterprise-network-topology2.png)
 
 🧠 Skills Demonstrated
 
