@@ -176,6 +176,7 @@ Changes applied:
 ii. Endpoint Hardening 
  - Disabled access to Control Panel
  - Prevented access to Command Prompt
+   ![Command Prompt](diagrams/Command-Prompt.png)
  - Disabled Windows Defender Antivirus turnoff
  - Enforced Windows Defender Firewall (Domain Profile enabled, inbound blocked)
    
