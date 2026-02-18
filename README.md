@@ -183,6 +183,7 @@ ii. Endpoint Hardening
   ![Windows Defender](diagrams/Windows-Defender.png)
  - Enforced Windows Defender Firewall (Domain Profile enabled, inbound blocked)
    ![Firewall policy](diagrams/Firewall-Policy.png)
+   
 🧠 Skills Demonstrated
  - Active Directory deployment
  - DNS configuration and validation
