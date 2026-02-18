@@ -169,17 +169,20 @@ Configured via: Computer Configuration → Policies → Windows Settings → Sec
 Changes applied:
  - Minimum password length: 12 characters
  - Complexity requirements: Enabled
+   ![Password Complexity](diagrams/Password-complexity.png)
  - Maximum password age: 60 days
  - Account lockout threshold: 5 failed attempts
  - Lockout duration: 15 minutes
    
 ii. Endpoint Hardening 
  - Disabled access to Control Panel
+  ![Control Panel](diagrams/Control-Panel.png)
  - Prevented access to Command Prompt
-   ![Command Prompt](diagrams/Command-Prompt.png)
+  ![Command Prompt](diagrams/Command-Prompt.png)
  - Disabled Windows Defender Antivirus turnoff
+  ![Windows Defender](diagrams/Windows-Defender.png)
  - Enforced Windows Defender Firewall (Domain Profile enabled, inbound blocked)
-   
+   ![Firewall policy](diagrams/Firewall-Policy.png)
 🧠 Skills Demonstrated
  - Active Directory deployment
  - DNS configuration and validation
