@@ -109,18 +109,6 @@ Successfully restored management access.
 - Monitor traffic & security logs
 
 ---
-
-## 🎯 Career Relevance
-
-This project demonstrates hands-on capability with:
-
-- Enterprise firewall deployment
-- Network architecture design
-- Infrastructure troubleshooting
-- Practical cybersecurity lab simulation
-
-The lab is continuously expanded to simulate real-world defensive security scenarios.
-
 **Phase 2 – Active Directory Integration DNS & Group Policy Deployment**
 
 In Phase 2, the lab environment was extended to include:
@@ -172,7 +160,25 @@ I found out that this is a common enterprise misconfiguration scenario when adju
  - Ensured correct assignment under: Allow log on through Remote Desktop Services
  - Forced policy update: gpupdate /force
  - Successfully validated domain login post-restart
+   
+**Advanced Group Policy Hardening**
+Additional hardening controls were implemented
 
+i. Password Policy Hardening
+Configured via: Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies
+Changes applied:
+ - Minimum password length: 12 characters
+ - Complexity requirements: Enabled
+ - Maximum password age: 60 days
+ - Account lockout threshold: 5 failed attempts
+ - Lockout duration: 15 minutes
+   
+ii. Endpoint Hardening 
+ - Disabled access to Control Panel
+ - Prevented access to Command Prompt
+ - Disabled Windows Defender Antivirus turnoff
+ - Enforced Windows Defender Firewall (Domain Profile enabled, inbound blocked)
+   
 🧠 Skills Demonstrated
  - Active Directory deployment
  - DNS configuration and validation
@@ -181,4 +187,6 @@ I found out that this is a common enterprise misconfiguration scenario when adju
  - User Rights Assignment management
  - Enterprise authentication troubleshooting
  - Policy validation using gpresult
+
+ 
 
