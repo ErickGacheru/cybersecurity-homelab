@@ -121,49 +121,64 @@ This project demonstrates hands-on capability with:
 
 The lab is continuously expanded to simulate real-world defensive security scenarios.
 
-**Phase 2 – Active Directory Integration**
+**Phase 2 – Active Directory Integration DNS & Group Policy Deployment**
 
-**Overview**
-
-In this phase, the lab was expanded from a standalone firewall deployment to a fully functional enterprise domain environment.
-A Windows Server 2022 Domain Controller was deployed and integrated with DNS to provide centralized identity and authentication services.
-A Windows 11 Enterprise client was joined to the domain and authenticated using domain credentials.
-
-**Infrastructure Components**
-
-1. Firewall: Sophos Home Firewall (NAT Gateway)
-2. Domain Controller: Windows Server 2022 (DC01)
-3. Active Directory Domain Services
-4. DNS Server
-5. Client Machine: Windows 11 Enterprise (WIN11-CL01)
-6. Internal Subnet: 172.16.16.0/24
-7. Domain Name: corp.local
-
-**Key Configuration Steps**
-
-- Configured static IP addressing for domain infrastructure
-- Deployed AD DS and DNS roles
-- Created new forest: corp.local
-- Created domain user account (labuser)
-- Joined Windows 11 client to the domain
-- Verified domain authentication and DNS resolution
-
+In Phase 2, the lab environment was extended to include:
+ - Deployment of Windows Server 2022 (Desktop Experience) as Domain Controller
+ - Installation and configuration of:
+    i. Active Directory Domain Services (AD DS)
+   ii. DNS Server Role
+ - Creation of domain: corp.local
+ - Creation of domain user: labuser
+ - Deployment of Windows 11 client machine
+ - Successful domain join and authentication validation
 📊 Updated Network Diagram
 
 ![Enterprise Network Topology](diagrams/enterprise-network-topology2.png)
 
+**Group Policy Deployment**
+A centralized baseline security policy was created and linked to the domain.
+GPO Created: CORP Baseline Security Policy
+
+**Configurations Applied:**
+i. Account Lockout Policy
+ - 5 failed attempts
+ - 15-minute lockout duration
+ii. User Restrictions
+ - Disabled access to Control Panel
+iii. Removable Storage Control
+ - Denied access to USB storage devices
+
+Policies were applied via: Computer Configuration → Policies → Security Settings
+Validation performed using: gpupdate /force and gpresult /r
+
+**Challenge: Domain User Unable to Log In**
+
+While validating domain authentication on the Windows client machine, the following error occurred:
+**“To sign in remotely you need the right to sign in through Remote Desktop Services.”**
+
+**Root Cause**
+A misconfiguration in User Rights Assignment within Group Policy modified default logon permissions.
+This unintentionally restricted domain user authentication.
+
+Specifically:
+- Required security principals were not properly included
+- Logon rights precedence in GPO overrode expected behavior
+I found out that this is a common enterprise misconfiguration scenario when adjusting RDP or logon security policies.
+
+**Resolution**
+ - Reviewed Group Policy → User Rights Assignment
+ - Verified membership of required security groups
+ - Ensured correct assignment under: Allow log on through Remote Desktop Services
+ - Forced policy update: gpupdate /force
+ - Successfully validated domain login post-restart
+
 🧠 Skills Demonstrated
+ - Active Directory deployment
+ - DNS configuration and validation
+ - Domain join troubleshooting
+ - Group Policy creation and linking
+ - User Rights Assignment management
+ - Enterprise authentication troubleshooting
+ - Policy validation using gpresult
 
-**Active Directory deployment**
-- DNS configuration and validation
-- Static IP design and segmentation
-- Domain user management
-- Domain join troubleshooting
-- Enterprise authentication workflow
-
-🚀 Next Phase (Planned)
-
-i. Group Policy deployment
-ii. User-based firewall control
-iii. Attack simulation using Kali Linux
-iv. Logging and monitoring enhancements
