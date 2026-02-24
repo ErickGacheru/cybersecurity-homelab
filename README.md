@@ -125,6 +125,7 @@ In Phase 2, the lab environment was extended to include:
 ![Enterprise Network Topology](diagrams/enterprise-network-topology2.png)
 
 **Group Policy Deployment**
+
 A centralized baseline security policy was created and linked to the domain.
 GPO Created: CORP Baseline Security Policy
 
@@ -304,7 +305,7 @@ In this phase, Active Directory authentication was fully integrated with Sophos 
      
   This ensures NAT is tied to controlled firewall rules rather than open policies.
 
-7.**Disabled overly permissive default network policy**
+7. **Disabled overly permissive default network policy**
 
   Disabled the default “Allow LAN to WAN” rule that previously allowed unrestricted outbound internet access.
   If left enabled, the default rule would:
