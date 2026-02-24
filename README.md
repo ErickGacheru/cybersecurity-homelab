@@ -212,18 +212,21 @@ In this phase, Active Directory authentication was fully integrated with Sophos 
 1. **Installed Sophos STAS on Domain Controller**
    Installed Sophos Transparent Authentication Suite (STAS) on the Domain Controller to enable real-time user authentication tracking between Active Directory and the Sophos Firewall
    STAS monitors Windows Security Log events and maps logged-in users to their IP addresses, allowing identity-based firewall policies.
+   ![Enterprise Network Topology](diagrams/STAS-Running-DC.png)
    **What This Achieved** : Enabled automatic Single Sign-On (SSO) between Windows domain users and Sophos Firewall.
    
 2. **Verified AD test connection status = OK**
    Configured Active Directory as an authentication server in Sophos Firewall and verified connectivity using the built-in "Test Connection" function.
+   ![Enterprise Network Topology](diagrams/AD-Authentication-successful.png)
    **What This Achieved**
    Confirmed that Sophos Firewall can:
    - Communicate with the Domain Controller
    - Authenticate against AD
    - Query domain users and groups
-   - 
+   
 3. **Validated live users detection in Sophos**
    Logged into Windows 11 domain client and confirmed the user appeared under Sophos Firewall → Authentication → Live Users.
+   ![Enterprise Network Topology](diagrams/Live-users.png)
    **What This Achieved** :Proved end-to-end integration:
  
 4. **Created AD security groups:**
@@ -231,8 +234,10 @@ In this phase, Active Directory authentication was fully integrated with Sophos 
    - Internet-Allowed and added Lab User
    - Internet-Blocked and added Test Blocked
    Then assigned domain users to control internet access based on group membership.
+   ![Enterprise Network Topology](diagrams/Internet-Allowed-Group.png)
+   ![Enterprise Network Topology](diagrams/Internet-blocked-Group.png)
 
-5. **Created identity-based firewall rule allowing only Internet-Allowed group**
+7. **Created identity-based firewall rule allowing only Internet-Allowed group**
    After integrating Active Directory with Sophos Firewall, I implemented identity-based access control using AD security groups.
    **Rule 1: Allow Internet – Internet-Allowed Group**
    Created a firewall rule that allows internet access only for users who are members of the Internet-Allowed Active Directory security group.
@@ -242,6 +247,7 @@ In this phase, Active Directory authentication was fully integrated with Sophos 
     - Source Identity: Internet-Allowed (AD Group)
     - Services: HTTP, HTTPS
     - Action: Allow
+   ![Enterprise Network Topology](diagrams/Internet-Allowed-Rule.png)
     **What This Achieved**
    Implemented role-based internet access control. Only users explicitly placed in the Internet-Allowed group are permitted outbound web access.
    This demonstrates identity-based policy enforcement rather than relying only on IP-based rules.
@@ -254,18 +260,20 @@ In this phase, Active Directory authentication was fully integrated with Sophos 
     - Services: Any
     - Action: Drop
    Positioned this rule appropriately in rule order to ensure it enforces restrictions correctly.
+   ![Enterprise Network Topology](diagrams/Internet-blocked-rule.png)
   **What This Achieved**
     - Enforced least privilege access control
     - Prevented unauthorized internet usage
     - Ensured access decisions are based on identity and group membership
   This mirrors how enterprises control internet access for different departments.
 
-6. **Configured NAT & Hardened Network Policy**
+8. **Configured NAT & Hardened Network Policy**
    Applied NAT (MASQ) on Internet-Allowed Rule: Configured a linked NAT rule to enable outbound internet access for the Internet-Allowed firewall rule.
    Configured:
    - Original Source: LAN subnet
    - Translated Source: MASQ (Masquerading)
    - Outbound Interface: WAN (Port2)
+    ![Enterprise Network Topology](diagrams/MASQ-Enabled.png)
    **What This Achieved**
    - Translates private internal IP addresses to the firewall’s WAN IP
    - Enables controlled internet access
@@ -279,6 +287,7 @@ In this phase, Active Directory authentication was fully integrated with Sophos 
   - Allow all LAN users internet access
   - Defeat the purpose of RBAC enforcement
   By disabling this rule, all traffic must now match the newly created identity-based firewall rules.
+  ![Enterprise Network Topology](diagrams/Default-LAN-RULE-DISABLED.png)
   **What This Achieved**
   - Enforced least privilege model
   - Removed open network access
