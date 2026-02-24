@@ -195,9 +195,11 @@ ii. Endpoint Hardening
 
 **Phase 3 – Identity-Based Internet Access Control (AD + STAS + Sophos Firewall)**
 **Objective**
+
 To integrate Active Directory authentication with Sophos Firewall using STAS and enforce identity-based internet access policies with correct NAT configuration.
 
 **Overview**
+
 In this phase, Active Directory authentication was fully integrated with Sophos Firewall using Sophos Transparent Authentication Suite (STAS). The objective was to enforce identity-based internet access policies where only authorized AD users were permitted outbound internet connectivity.
 
 **Architecture Implemented**
