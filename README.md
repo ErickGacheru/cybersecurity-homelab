@@ -350,6 +350,7 @@ Result:
 - Identity-based access control is enforced
 
 **Test 2 – testblocked (Internet-Blocked Group)**
+
 Expected Behavior: User should be denied internet access due to identity-based block rule.
 
 Result:
