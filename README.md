@@ -193,5 +193,29 @@ ii. Endpoint Hardening
  - Enterprise authentication troubleshooting
  - Policy validation using gpresult
 
- 
+**Phase 3 – Identity-Based Internet Access Control (AD + STAS + Sophos Firewall)**
+**Objective**
+To integrate Active Directory authentication with Sophos Firewall using STAS and enforce identity-based internet access policies with correct NAT configuration.
 
+**Overview**
+In this phase, Active Directory authentication was fully integrated with Sophos Firewall using Sophos Transparent Authentication Suite (STAS). The objective was to enforce identity-based internet access policies where only authorized AD users were permitted outbound internet connectivity.
+
+**Architecture Implemented**
+- Windows Server 2019 Domain Controller
+- Windows 11 Domain-Joined Client
+- Sophos Firewall (Port2 as WAN)
+- STAS installed on Domain Controller
+- Identity-based firewall rule
+- Linked NAT rule with MASQ enabled
+
+Implementation Steps
+1. Installed Sophos STAS on Domain Controller
+2. Verified AD test connection status = OK
+3. Confirmed Event ID 4624 logon events
+4. Validated live users detection in Sophos
+5. Created AD security groups:
+6. Internet-Allowed
+7. Internet-Blocked
+8. Created identity-based firewall rule allowing only Internet-Allowed group
+9. Configured linked NAT rule with MASQ on WAN (Port2)
+10. Disabled overly permissive default network policy
