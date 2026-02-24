@@ -194,6 +194,7 @@ ii. Endpoint Hardening
  - Policy validation using gpresult
 
 **Phase 3 – Identity-Based Internet Access Control (AD + STAS + Sophos Firewall)**
+
 **Objective**
 
 To integrate Active Directory authentication with Sophos Firewall using STAS and enforce identity-based internet access policies with correct NAT configuration.
