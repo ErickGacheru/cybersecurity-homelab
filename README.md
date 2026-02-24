@@ -212,7 +212,7 @@ In this phase, Active Directory authentication was fully integrated with Sophos 
 1. **Installed Sophos STAS on Domain Controller**
    Installed Sophos Transparent Authentication Suite (STAS) on the Domain Controller to enable real-time user authentication tracking between Active Directory and the Sophos Firewall
    STAS monitors Windows Security Log events and maps logged-in users to their IP addresses, allowing identity-based firewall policies.
-   ![Enterprise Network Topology](diagrams/STAS-Running-DC.png)
+   ![STAS RUNNING](diagrams/STAS-Running-DC.png)
    **What This Achieved** : Enabled automatic Single Sign-On (SSO) between Windows domain users and Sophos Firewall.
    
 2. **Verified AD test connection status = OK**
