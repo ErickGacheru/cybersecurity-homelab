@@ -322,3 +322,59 @@ In this phase, Active Directory authentication was fully integrated with Sophos 
   - Removed open network access
   - Strengthened firewall security posture
   - Ensured policy enforcement integrity
+
+8. **Validated Identity-Based Access Enforcement (Allow vs Block Test)**
+
+   After configuring identity-based firewall rules, I performed validation testing using two separate domain users:
+   - labuser → Member of Internet-Allowed group
+   - testblocked → Member of Internet-Blocked group (or not added to Internet-Allowed)
+
+I logged into the Windows 11 domain client using each account and tested outbound internet connectivity to confirm policy enforcement.
+
+**Test 1 – labuser (Internet-Allowed Group)**
+
+Expected Behavior: User should have full internet access based on identity-based firewall rule.
+
+Result:
+- Successfully accessed allowed websites
+- Traffic matched the “Allow Internet – Internet-Allowed Group” rule
+- User visible under Sophos Live Users
+
+![Enterprise Network Topology](diagrams/Internet-Allowed-labuser.png)
+![Enterprise Network Topology](diagrams/Internet-Allowed-labuser-log.png)
+
+**What This Proves**
+- STAS identity mapping works
+- Firewall correctly matches AD group membership
+- NAT is functioning correctly
+- Identity-based access control is enforced
+
+**Test 2 – testblocked (Internet-Blocked Group)**
+Expected Behavior: User should be denied internet access due to identity-based block rule.
+
+Result:
+- Web access failed
+- Traffic matched the “Block Internet” rule
+- Sophos logs show dropped traffic
+
+![Enterprise Network Topology](diagrams/Internet-blocked-log-testblocked.png)
+
+**What This Proves**
+- RBAC enforcement works correctly
+- Firewall rule order is properly configured
+- Default LAN rule is no longer bypassing restrictions
+- Identity-based security model is functioning as designed
+
+**Architecture Overview**
+
+This lab environment simulates an enterprise identity-aware network security architecture integrating Microsoft Active Directory with Sophos Firewall for centralized authentication and policy enforcement.
+The Domain Controller provides authentication services, DNS resolution, and centralized identity management. Sophos Transparent Authentication Suite (STAS) monitors domain logon events (Event ID 4624) and maps authenticated users to their IP addresses in real time.
+This integration enables identity-based firewall rule enforcement, allowing network access decisions to be made based on Active Directory group membership rather than static IP addresses.
+
+Outbound internet access is controlled through:
+- Role-Based Access Control (RBAC) via AD security groups
+- Identity-aware firewall rules
+- Linked NAT (MASQ) configuration
+- Removal of default permissive policies
+
+This architecture reflects real-world enterprise implementations where security enforcement is identity-driven rather than network-based.
