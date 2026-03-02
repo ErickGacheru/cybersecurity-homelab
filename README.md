@@ -379,3 +379,124 @@ Outbound internet access is controlled through:
 - Removal of default permissive policies
 
 This architecture reflects real-world enterprise implementations where security enforcement is identity-driven rather than network-based.
+
+
+**PHASE 5 – Identity-Based Web Filtering & HTTPS Inspection**
+
+**Objective**
+
+To implement identity-based web filtering integrated with Active Directory authentication, allowing granular control over internet access based on user group membership while enforcing HTTPS inspection for encrypted traffic visibility.
+
+**Overview**
+
+After successfully integrating Active Directory with Sophos Firewall using STAS (Phase 3), this phase focused on enforcing corporate internet usage policies through:
+
+  - Category-based web filtering
+  - Identity-based policy enforcement
+  - HTTPS traffic inspection
+  - Real-time log validation
+
+The goal was to ensure only authorized users had internet access while blocking inappropriate content categories.
+
+**Architecture Overview**
+
+The implementation follows this traffic flow:
+
+Windows 11 Client → Domain Controller (Authentication via STAS) → Sophos Firewall (Identity Mapping + Web Filtering + HTTPS Inspection) → Internet (WAN via NAT)
+
+**Key Components:**
+
+  - Domain Controller (Active Directory Authentication)
+  - Sophos STAS (User Logon Monitoring)
+  - Sophos Firewall (Policy Enforcement)
+  - Identity-Based Firewall Rule
+  - Web Filtering Policy
+  - SSL/TLS Decryption Engine
+  - MASQ NAT on WAN Interface
+
+This design ensures that internet access is not IP-based but tied directly to authenticated AD users.
+
+**Implementation Steps**
+
+1. **Created Corporate Web Filtering Policy**
+
+A custom web policy named Corporate Web Policy was created.
+
+Configured settings:
+  - Social Networking → Block
+  - Sexually Explicit → Block
+  - Default action configured appropriately
+  - HTTPS Decryption enabled within the policy
+
+This policy enforces acceptable use standards aligned with corporate environments.
+
+2. **Applied Web Policy to Identity-Based Firewall Rule**
+
+The Corporate Web Policy was attached to the existing:
+
+Identity-Based Internet Firewall Rule
+
+This rule:
+  - Source: Internet-Allowed AD Group
+  - Destination: WAN
+  - Services: HTTP and HTTPS
+  - NAT: MASQ applied on WAN
+  - Web Policy: Corporate Web Policy
+
+This ensured filtering was enforced only for authenticated AD users.
+
+3. **Enabled HTTPS Decryption & Scanning**
+
+Since modern websites use HTTPS encryption, HTTPS Decryption was enabled under Web settings to allow:
+  - Deep inspection of encrypted traffic
+  - Accurate URL categorization
+  - Enforcement of category-based blocking
+    
+Without HTTPS inspection, encrypted traffic would bypass filtering logic.
+
+4. **Exported and Installed Sophos SSL CA Certificate**
+
+To prevent browser certificate errors:
+  - The Sophos default SSL CA certificate was exported from the firewall.
+  - Installed on the Windows 11 client under: Trusted Root Certification Authorities (Computer Account)
+
+This allowed the client to trust the firewall during HTTPS decryption.
+
+5. **Validated Category-Based Blocking**
+
+Testing was performed using multiple websites:
+  - x.com (Social Networking) → Successfully Blocked
+  - xxx.com (Sexually Explicit) → Successfully Blocked
+  - Facebook → Successfully Blocked
+
+Log Viewer confirmed:
+  - Identity-based logging
+  - Category detection
+  - Web filtering enforcement
+
+This validated that HTTPS inspection and category-based blocking were operational.
+
+6. **Challenge Faced & Resolution**
+   **Facebook Not Consistently Blocked**
+Although Social Networking category was configured as Block, Facebook traffic did not consistently appear in Web Filter logs while other social media sites (x.com) were correctly blocked.
+
+**Troubleshooting Performed**
+  - Verified STAS authentication status
+  - Confirmed firewall rule priority
+  - Validated Web Policy assignment
+  - Checked SSL decryption settings
+  - Installed and verified Sophos CA certificate
+  - Reviewed category classification
+  - Cleared sessions and retested
+
+  **Technical Analysis** : The behavior was linked to modern CDN-based traffic patterns and encrypted traffic handling mechanisms used by certain platforms. While the filtering engine was functional (validated by blocking other social networking and explicit sites), certain high-traffic platforms may require additional tuning depending on deployment mode (Web Proxy vs Policy-Based Inspection).
+
+**Key Skills acquired**
+  - Identity-Based Access Control
+  - Active Directory Integration
+  - Web Proxy Configuration
+  - HTTPS Traffic Decryption
+  - SSL Certificate Deployment
+  - Log Analysis & Monitoring
+  - Enterprise Troubleshooting Methodology
+  - NAT Integration with Filtering Policies
