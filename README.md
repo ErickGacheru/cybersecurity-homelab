@@ -447,6 +447,8 @@ This rule:
 
 This ensured filtering was enforced only for authenticated AD users.
 
+![Enterprise Network Topology](diagrams/Firewall-rule-with-web-policy.png)
+
 3. **Enabled HTTPS Decryption & Scanning**
 
 Since modern websites use HTTPS encryption, HTTPS Decryption was enabled under Web settings to allow:
@@ -456,6 +458,8 @@ Since modern websites use HTTPS encryption, HTTPS Decryption was enabled under W
     
 Without HTTPS inspection, encrypted traffic would bypass filtering logic.
 
+![Enterprise Network Topology](diagrams/HTTPS-decryption.png)
+
 4. **Exported and Installed Sophos SSL CA Certificate**
 
 To prevent browser certificate errors:
@@ -463,6 +467,8 @@ To prevent browser certificate errors:
   - Installed on the Windows 11 client under: Trusted Root Certification Authorities (Computer Account)
 
 This allowed the client to trust the firewall during HTTPS decryption.
+
+![Enterprise Network Topology](diagrams/Sophos-SSL-CA.png)
 
 5. **Validated Category-Based Blocking**
 
@@ -477,6 +483,9 @@ Log Viewer confirmed:
   - Web filtering enforcement
 
 This validated that HTTPS inspection and category-based blocking were operational.
+
+![Enterprise Network Topology](diagrams/Sexually-Explicit-blocked.png)
+![Enterprise Network Topology](diagrams/Twitter-blocked.png)
 
 6. **Challenge Faced & Resolution**
    **Facebook Not Consistently Blocked**
