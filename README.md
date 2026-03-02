@@ -430,6 +430,8 @@ Configured settings:
 
 This policy enforces acceptable use standards aligned with corporate environments.
 
+![Enterprise Network Topology](diagrams/Corporate-Web-Policy.png).
+
 2. **Applied Web Policy to Identity-Based Firewall Rule**
 
 The Corporate Web Policy was attached to the existing:
